@@ -6,7 +6,7 @@ Calculate bacteria doubling time from growth curve using fitted curve of sigmoid
   2. Project motivation
   3. File description
   4. Summary
-  5. Licensing, Authors, Acknowledgements
+  5. Licensing
 
 ## Installation
 The code runs with Python version **3**.
@@ -27,3 +27,9 @@ Growth_curve folder contains:
 2. input_template: modify the min and hour according to experimental design; add as many sample names as needed and fill in OD600nm reading results.
 3. terminal look: what it looks like on your terminal after successful run of the code. It will first ask you the input file name, please paste the file name here. Then it will ask if you want to see the growth curve plotted out together with fitted curve, say 'yes/no'. Lastly, it will ask if you want to save the doubling time in a file, enter the file name if you want it to be save or press enter to skip otherwise.
 4. two pdf files: if you asked to see the growth curve plots, these will be what they look like
+
+## Summary
+(to be continued)
+
+## Licensing
+Licensing: MIT license. Acknowledgement would be appreciated.
