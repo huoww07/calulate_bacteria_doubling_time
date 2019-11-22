@@ -2,14 +2,13 @@ import pandas as pd
 import numpy as np
 import pylab
 from scipy.optimize import curve_fit
-from sklearn.metrics import r2_score
 
 class GrowthCurve:
     def __init__(self, data=None, doubling_time=None, \
-                r2_all=None, max_growth_time=None):
+                r2=None, max_growth_time=None):
         self.data = pd.DataFrame()
         self.doubling_time = pd.DataFrame()
-        self.r2_all = pd.DataFrame()
+        self.r2 = pd.DataFrame()
         self.max_growth_time = pd.DataFrame()
 
     def read_data(self, data_file):
@@ -34,13 +33,19 @@ class GrowthCurve:
     def linear(self, x, a, b):
         y = a*x +b
         return y
+    #define r_square function
+    def r_square(self, y_true, y_predict):
+        SStotal = np.sum((y_true - np.mean(y_true)) ** 2)
+        SSresidual = np.sum((y_predict - y_true) ** 2)
+        r2 = 1 - SSresidual/SStotal
+        return r2
 
     def fit_sigmoid(self, plot=False):
         #initialize slope table and rsq table
         doubling_time = np.zeros(self.data.shape[1])
         r2_all = np.zeros(self.data.shape[1])
         max_growth_time = np.zeros(self.data.shape[1])
-        strain_name = self.data.columns[2:]
+        strain_name = list(self.data.columns[2:])
         #loop through column
         for strain in range(2, self.data.shape[1]):
                         ydata = np.array(self.data.iloc[1:, strain])
@@ -68,7 +73,7 @@ class GrowthCurve:
                         x_test=np.array(self.data.iloc[:,1])
                         y_test=np.array(self.data.iloc[:,strain])
                         y_fit = self.sigmoid(x_test, *popt)
-                        r_square = r2_score(y_test, y_fit)
+                        r_square = self.r_square(y_test, y_fit)
                         r2_all[strain] = r_square
 
                         #plot
@@ -92,13 +97,13 @@ class GrowthCurve:
                             pylab.title(strain_name[strain-2])
                             #pylab.savefig('%s.png' % strain_name[strain-2])
                             pylab.show()
-        self.r2_all = r2_all
-        self.max_growth_time = max_growth_time
-        self.doubling_time = doubling_time
+        self.r2 = r2_all[2:]
+        self.max_growth_time = max_growth_time[2:]
+        self.doubling_time = doubling_time[2:]
 
     def show_result(self, sort_name=False):
-        result_zip = list(zip(self.strain_name, self.doubling_time[2:], \
-                              self.max_growth_time[2:],self.r2_all[2:]))
+        result_zip = list(zip(self.strain_name, self.doubling_time, \
+                              self.max_growth_time,self.r2))
         col_names=['strain','doubling time (min)', \
                    'max growth time point (hr)','r2 square']
         result = pd.DataFrame(result_zip, columns=col_names)
@@ -111,6 +116,6 @@ class GrowthCurve:
         try:
             self.result.to_excel(output_file, header=True, \
                                 index=False,float_format="%.3f")
+            print("Results saved. Good day!")
         except:
             print('Can not save result to file!')
-        print("Results saved. Good day!")

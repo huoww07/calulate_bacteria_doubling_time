@@ -27,7 +27,7 @@ However, the measurement of OD600nm often has variations and simply taking two t
   c. terminal look: what it looks like on your terminal after successful run of the code. It will first ask you the input file name, please paste the file name here. Then it will ask if you want to see the growth curve plotted out together with fitted curve, say 'yes/no'. Lastly, it will ask if you want to save the doubling time in a file, enter the file name if you want it to be save or press enter to skip otherwise.
   d. two pdf files: if you asked to see the growth curve plots, these will be what they look like
 
-2. Doublint_time_Modularized comes with:
+2. Doublint_time_Modularized runs with python version 3 and comes with:
   a. setup.py : used for pip installation (to be used with Doubling_time_Modularized)
   b. Within the folder, Doubling_time.py is modularized python package to calculate doubling time.
   c. Within the folder, input_template2 provides template for input data, similar with that in scenario above.
@@ -35,9 +35,10 @@ However, the measurement of OD600nm often has variations and simply taking two t
     from Doubling_time import GrowthCurve
     test = GrowthCurve()
     test.read_data('input_template2.xlsx')
-    test.fit_sigmoid()    # adding plot=True would enable onscreen plot (have not tested)
+    test.fit_sigmoid()    # adding plot=True would enable onscreen plot
     test.show_result()    # this would print the result in a table on screen
     test.save_result('result.xlsx')   # just make sure the extension is xlsx
+  d. Required libraries: pandas, numpy, pylab, scipy
 
 ## Summary
 (to be continued)
