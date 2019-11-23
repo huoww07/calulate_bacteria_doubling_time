@@ -1,0 +1,13 @@
+class doubling_time.GrowthCurve
+
+Methods:
+1.  read_data(data_file): data_file has to be xlsx format, first two columns are
+time in minutes and time in hours, followed by as many samples as needed.
+2.  fit_sigmoid(plot=False): fit the sigmoid function to read data.
+3.  show_result: print result table to screen. With 'plot=True', the plot will be
+printed on screen.
+4.  save_result('result.xlsx'): save the result table in file named 'result.xlsx'.
+
+Attributes:
+1.  r_square: array, shape(n_samples). Calculated r-square using fitted sigmoid
+function
