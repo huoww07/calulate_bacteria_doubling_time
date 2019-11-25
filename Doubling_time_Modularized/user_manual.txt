@@ -9,5 +9,10 @@ printed on screen.
 4.  save_result('result.xlsx'): save the result table in file named 'result.xlsx'.
 
 Attributes:
-1.  r_square: array, shape(n_samples). Calculated r-square using fitted sigmoid
+1.  data: DataFrame, shape (n_time_points, n_samples+2). input data file in pandas
+DataFrame float_format
+2.  doubling_time: array, shape(n_samples). Calculated doubling time for each samples as input order
+3.  max_growth_time: array, shape(n_samples). The time point (in hours) along the
+growth curve that the doubling time was calculated, which represents the maximum growth rate.  
+4.  r2: array, shape(n_samples). Calculated r-square using fitted sigmoid
 function

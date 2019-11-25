@@ -5,8 +5,7 @@ Calculate bacteria doubling time from growth curve using fitted curve of sigmoid
   1. Installation
   2. Project motivation
   3. File description
-  4. Summary
-  5. Licensing
+  4. Licensing
 
 ## Installation
 The code runs with Python version **3**.
@@ -39,9 +38,7 @@ However, the measurement of OD600nm often has variations and simply taking two t
     test.show_result()    # this would print the result in a table on screen
     test.save_result('result.xlsx')   # just make sure the extension is xlsx
   d. Required libraries: pandas, numpy, pylab, scipy
-
-## Summary
-(to be continued)
+  e. user_manual: contains all methods and attributes in the module.
 
 ## Licensing
 Licensing: MIT license. Acknowledgement would be appreciated.
