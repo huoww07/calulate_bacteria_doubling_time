@@ -1,9 +1,10 @@
 import os
 
 
-#take input file name through prompt
-file_name = input("Please enter your file name: ")
-plot_option = input('Do you want to generate the growth curve? ')
+# take input file name through prompt
+# please make sure the file is in the same directory with this script
+file_name = input("Please enter your file name: ") # example response: input_template.xlsx
+plot_option = input('Do you want to generate the growth curve? ') # yes/no
 file_path = os.path.dirname(__file__)
 input_file = os.path.join(file_path, file_name)
 try:
@@ -125,7 +126,7 @@ for strain in range(2, data.shape[1]):
                 y_fit = sigmoid(x_test, *popt)
                 mse_value = mse(y_test, y_fit)
                 mse_all[strain] = mse_value
-				
+
                 #calculate slope
                 #x_linear_data = np.array([x_median-e, x_median, x_median+e])
                 #y_linear_data = np.array([y1, y_median, y2])
@@ -136,7 +137,7 @@ for strain in range(2, data.shape[1]):
                 ytt = linear(xtt, *popttt)
                 #xtt = np.linspace(x_median - x_median/2, x_median + x_median/2, 4)
                 #ytt = linear(xtt, *popttt)
-                
+
                 #plot
                 if plot_option in ['yes', 'y', 'Y', 'Yes', 'YES']:
                     pylab.plot(xdata, ydata, 'o', label='data')
@@ -157,13 +158,10 @@ print('Saving to file...')
 result_zip = list(zip(strain_name, doubling_time[2:], max_growth_time[2:],mse_all[2:]))
 col_names=['strain','doubling time','max growth time point','mean square error']
 result = pd.DataFrame(result_zip, columns=col_names)
-result.sort_values(by=['strain'], inplace=True) 
+result.sort_values(by=['strain'], inplace=True)
 print(result)
 try:
                 result.to_excel(output_file, header=True, index=False,float_format="%.3f")
 except:
                 print('No output file saved!')
 print("Calculation done. Good day!")
-
-
-                
