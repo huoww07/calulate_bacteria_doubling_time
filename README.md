@@ -41,4 +41,5 @@ However, the measurement of OD600nm often has variations and simply taking two t
   e. user_manual: contains all methods and attributes in the module.
 
 ## Licensing
-Licensing: MIT license. Acknowledgement would be appreciated.
+Licensing: MIT license.
+Acknowledgement would be appreciated.
