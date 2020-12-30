@@ -16,3 +16,12 @@ DataFrame float_format
 growth curve that the doubling time was calculated, which represents the maximum growth rate.  
 4.  r2: array, shape(n_samples). Calculated r-square using fitted sigmoid
 function
+
+
+Run samples:
+import Doubling_time
+data = Doubling_time.GrowthCurve()
+data.read_data("input_template2.xlsx")
+data.fit_sigmoid(plot=True)
+data.show_result()
+data.save_result("/Users/Wenwen/Downloads/20200707_doubling_time.xlsx")
