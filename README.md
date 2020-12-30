@@ -1,5 +1,5 @@
 # Calulate bacteria doubling time
-Calculate bacteria doubling time from growth curve using fitted curve of sigmoid function. For web based acesss, please visit https://flask-double-time.herokuapp.com/. No installation is required for web based access.
+Calculate bacteria doubling time from growth curve using fitted curve of sigmoid function. For web based acesss, please visit https://flask-double-time.herokuapp.com/ (Note: the webpage may take a few minutes to load). No installation is required for web based access.
 
 ## Table of Contents
   1. Installation
