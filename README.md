@@ -1,5 +1,5 @@
-# calulate_bacteria_doubling_time
-Calculate bacteria doubling time from growth curve using fitted curve of sigmoid function
+# Calulate bacteria doubling time
+Calculate bacteria doubling time from growth curve using fitted curve of sigmoid function. For web based acesss, please visit https://flask-double-time.herokuapp.com/. No installation is required for web based access.
 
 ## Table of Contents
   1. Installation
@@ -8,7 +8,7 @@ Calculate bacteria doubling time from growth curve using fitted curve of sigmoid
   4. Licensing
 
 ## Installation
-The code runs with Python version **3**.
+For local usage, the code runs with Python version **3**.
 
 Required libraries:
 numpy, pandas, pylab, scipy, os
@@ -22,7 +22,7 @@ However, the measurement of OD600nm often has variations and simply taking two t
 ## File description
 1. Growth_curve folder contains:
 
-  a. cal.double.time.curve.fit.py: run with python version 3
+  a. cal.double.time.curve.fit.py: run with python version 3. This file is all you need for local usage.
   
   b. input_template: modify the min and hour according to experimental design; add as many sample names as needed and fill in OD600nm reading results.
   
@@ -30,13 +30,13 @@ However, the measurement of OD600nm often has variations and simply taking two t
   
   d. two pdf files: if you asked to see the growth curve plots, these will be what they look like
 
-2. Doublint_time_Modularized runs with python version 3 and comes with:
+2. Doublint_time_Modularized folder contains the program in modularized form:
 
   a. setup.py : used for pip installation (to be used with Doubling_time_Modularized)
   
-  b. Within the folder, Doubling_time.py is modularized python package to calculate doubling time.
+  b. Doubling_time.py: modularized python package to calculate doubling time.
   
-  c. Within the folder, input_template2 provides template for input data, similar with that in scenario above.
+  c. input_template2: provides template for input data, similar with the scenario above.
   
   To run without installing, save the Doubling_time.py in the working directory with data file. And run below:
     from Doubling_time import GrowthCurve
@@ -52,4 +52,3 @@ However, the measurement of OD600nm often has variations and simply taking two t
 
 ## Licensing
 Licensing: MIT license.
-Acknowledgement would be appreciated.

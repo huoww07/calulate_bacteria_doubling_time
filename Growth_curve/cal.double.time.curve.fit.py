@@ -83,6 +83,12 @@ def mse(y_test, y_fit):
 	total = np.sum((y_test - y_fit) * (y_test-y_fit)) / len(y_test)
 	return total
 
+#define r_square function
+def r_square(y_true, y_predict):
+    SStotal = np.sum((y_true - np.mean(y_true)) ** 2)
+    SSresidual = np.sum((y_predict - y_true) ** 2)
+    r2 = 1 - SSresidual/SStotal
+    return r2
 #read csv file
 data = pd.read_excel(input_file)
 #transform data into log(OD)/log(2), default 1st column is time in minutes, 2nd column is time in hours
@@ -92,7 +98,7 @@ data_transform = pd.concat([data.iloc[:, :2], data_od_log], axis=1)
 
 #initialize slope table and rsq table
 doubling_time = np.zeros(data.shape[1])
-mse_all = np.zeros(data.shape[1])
+r_square_all = np.zeros(data.shape[1])
 max_growth_time = np.zeros(data.shape[1])
 strain_name = data.columns[2:]
 #loop through column
@@ -100,7 +106,6 @@ for strain in range(2, data.shape[1]):
                 ydata = np.array(data_transform.iloc[1:, strain])
                 xdata = np.array(data_transform.iloc[1:, 1])  #column 1 is time in hours, row 1 is 0 hrs
                 popt, pcov = curve_fit(sigmoid, xdata, ydata, p0=[2,1,9,8]) #set p0 to avoid going to local minimal
-                print(popt)
                 #previously, was using x_median and y_median to calculate doubling time
                 #y_median = -popt[-1]/2
                 #x_median = sigmoid_x(y_median, *popt)
@@ -124,8 +129,8 @@ for strain in range(2, data.shape[1]):
                 x_test=np.array(data_transform.iloc[:,1])
                 y_test=np.array(data_transform.iloc[:,strain])
                 y_fit = sigmoid(x_test, *popt)
-                mse_value = mse(y_test, y_fit)
-                mse_all[strain] = mse_value
+                r2 = r_square(y_test, y_fit)
+                r_square_all[strain] = r2
 
                 #calculate slope
                 #x_linear_data = np.array([x_median-e, x_median, x_median+e])
@@ -153,10 +158,10 @@ for strain in range(2, data.shape[1]):
 print('Doubling time results:')
 for i in range(len(strain_name)):
                 print('%s : %.3f min' % (strain_name[i], doubling_time[i+2]))
-                print('Mean square error durint %s fitting: %.3f' % (strain_name[i], mse_all[i+2]))
+                print('R2 score for %s fitting: %.3f' % (strain_name[i], r_square_all[i+2]))
 print('Saving to file...')
-result_zip = list(zip(strain_name, doubling_time[2:], max_growth_time[2:],mse_all[2:]))
-col_names=['strain','doubling time','max growth time point','mean square error']
+result_zip = list(zip(strain_name, doubling_time[2:], max_growth_time[2:],r_square_all[2:]))
+col_names=['strain','doubling time','max growth time point','R-squared']
 result = pd.DataFrame(result_zip, columns=col_names)
 result.sort_values(by=['strain'], inplace=True)
 print(result)
