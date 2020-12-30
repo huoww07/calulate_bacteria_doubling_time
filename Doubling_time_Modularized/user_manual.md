@@ -18,10 +18,12 @@ growth curve that the doubling time was calculated, which represents the maximum
 function
 
 
-Run samples:
-import Doubling_time
-data = Doubling_time.GrowthCurve()
-data.read_data("input_template2.xlsx")
-data.fit_sigmoid(plot=True)
-data.show_result()
-data.save_result("/Users/Wenwen/Downloads/20200707_doubling_time.xlsx")
+How to run:
+1.  python3
+2.  // within python3 shell, run below:
+3.  import Doubling_time
+4.  data = Doubling_time.GrowthCurve()
+5.  data.read_data("input_template2.xlsx")
+6.  data.fit_sigmoid(plot=True)
+7.  data.show_result()
+8.  data.save_result("/Users/Wenwen/Downloads/20200707_doubling_time.xlsx")
